@@ -1,118 +1,160 @@
-
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
     <title>Página de Inicio - Gestión de Pacientes</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 0;
-        }
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+      }
 
-        .container {
-            width: 80%;
-            margin: auto;
-            overflow: hidden;
-        }
+      .container {
+        width: 80%;
+        margin: auto;
+        overflow: hidden;
+      }
 
-        .invisible-link {
+      .invisible-link {
         color: #50b3a2; /* Color igual al de la barra de navegación */
-        }
+      }
 
-        .invisible-link:hover {
+      .invisible-link:hover {
         color: #50b3a2; /* O cualquier otro color para el hover */
-        }
+      }
 
-        header {
-            background: #50b3a2;
-            color: white;
-            padding-top: 30px;
-            min-height: 70px;
-            border-bottom: #e8491d 3px solid;
-        }
+      header {
+        background: #50b3a2;
+        color: white;
+        padding-top: 30px;
+        min-height: 70px;
+        border-bottom: #e8491d 3px solid;
+      }
 
-        header a {
-            color: #ffffff;
-            text-decoration: none;
-            text-transform: uppercase;
-            font-size: 16px;
-        }
+      header a {
+        color: #ffffff;
+        text-decoration: none;
+        text-transform: uppercase;
+        font-size: 16px;
+      }
 
-        header ul {
-            padding: 0;
-            margin: 0;
-            list-style: none;
-            overflow: hidden;
-        }
+      header ul {
+        padding: 0;
+        margin: 0;
+        list-style: none;
+        overflow: hidden;
+      }
 
-        header li {
-            float: left;
-            display: inline;
-            padding: 0 20px 0 20px;
-        }
+      header li {
+        float: left;
+        display: inline;
+        padding: 0 20px 0 20px;
+      }
 
-        header #branding {
-            float: left;
-        }
+      header #branding {
+        float: left;
+      }
 
-        header #branding h1 {
-            margin: 0;
-        }
+      header #branding h1 {
+        margin: 0;
+      }
 
-        header nav {
-            float: right;
-            margin-top: 10px;
-        }
+      header nav {
+        float: right;
+        margin-top: 10px;
+      }
 
-        header .highlight, header .current a {
-            color: #e8491d;
-            font-weight: bold;
-        }
+      header .highlight,
+      header .current a {
+        color: #e8491d;
+        font-weight: bold;
+      }
 
-        header a:hover {
-            color: #ffffff;
-            font-weight: bold;
-        }
+      header a:hover {
+        color: #ffffff;
+        font-weight: bold;
+      }
 
-        form {
-            margin-top: 20px;
-        }
+      form {
+        margin-top: 20px;
+      }
 
-        label, input, button {
-            margin: 5px;
-            font-size: 16px;
-        }
+      label,
+      input,
+      button {
+        margin: 5px;
+        font-size: 16px;
+      }
     </style>
-</head>
-<body>
-    <header>
-        <div class="container">
-            <div id="branding">
-                <h1><span class="highlight">Rasi</span> Medical</h1>
-            </div>
-            <nav>
-                <ul>
-                    <li><a href="{% url 'lista_historias_clinicas' %}">Listar Historias Clínicas</a></li>
-                    <li><a href="{% url 'crear_historia_clinica' %}">Crear Historia Clínica</a></li>
-                    <li><a href="{% url 'crear_paciente' %}" class="invisible-link">Crear Paciente</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <nav class="navbar navbar-light bg-light">
+        <a class="navbar-brand" href="/">
+          <img src="/static/media/logo.png" width="45" height="45" alt="" />
+        </a>
+      </nav>
+
+      <nav class="navbar navbar-light bg-light">
+        <a class="navbar-brand" href="/"> RASI MEDICAL </a>
+      </nav>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'lista_historias_clinicas' %}">Listar Historias Clinicas</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'crear_historia_clinica' %}">Crear Historia Clinica</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'crear_paciente' %}">Crear Pacientes</a>
+          </li>
+        </ul>
+
+        <form class="form-inline my-2 my-lg-0">
+          {% if user.is_authenticated %}
+          <ul class="nav navbar-nav navbar-right">
+            <li>
+              <a style="font-size: 120%" class="nav-link"
+                >{{ user.username }}</a
+              >
+            </li>
+            <li>
+              <a
+                style="font-size: 120%; padding-right: 20px"
+                class="nav-link"
+                href="/logout"
+                >Log out</a
+              >
+            </li>
+          </ul>
+          {% else %}
+          <ul class="nav navbar-nav navbar-right">
+            <li>
+              <a
+                style="font-size: 120%; padding-right: 20px"
+                class="navbar-link"
+                href="/login/auth0"
+                >Login</a
+              >
+            </li>
+          </ul>
+          {% endif %}
+        </form>
+      </div>
+    </nav>
 
     <div class="container">
-        <h2>Consultar Historia Clínica</h2>
-        <form action="{% url 'buscar_historia_clinica' %}" method="get">
-            <label for="id_historia">ID de Historia Clínica:</label>
-            <input type="text" id="id_historia" name="id" required>
-            <button type="submit">Buscar</button>
-        </form>        
+      <h2>Consultar Historia Clínica</h2>
+      <form action="{% url 'buscar_historia_clinica' %}" method="get">
+        <label for="id_historia">ID de Historia Clínica:</label>
+        <input type="text" id="id_historia" name="id" required />
+        <button type="submit">Buscar</button>
+      </form>
     </div>
 
-
     <!-- Aquí puedes añadir más contenido o secciones a tu página de inicio si lo deseas -->
-
-</body>
+  </body>
 </html>
