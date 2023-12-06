@@ -1,25 +1,36 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Paciente, HistoriaClinica, Adenda
 from .forms import PacienteForm, HistoriaClinicaForm, AdendaForm
+from monitoring.auth0backend import getRole
+from django.http import HttpResponseRedirect, HttpResponse
 
 def inicio(request):
     return render(request, 'inicio.html')
 
 def lista_pacientes(request):
-    pacientes = Paciente.objects.all()
-    return render(request, 'gestionPacientes/lista_pacientes.html', {'pacientes': pacientes})
+    role = getRole(request)
+    if role == 'Doctor':
+        pacientes = Paciente.objects.all()
+        return render(request, 'gestionPacientes/lista_pacientes.html', {'pacientes': pacientes})
+    else:
+        return HttpResponse("No tienes permisos para ver esta página")
 
 def crear_paciente(request):
-    if request.method == 'POST':
-        form = PacienteForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('lista_pacientes')
+    role = getRole(request)
+    if role == 'Doctor':
+        if request.method == 'POST':
+            form = PacienteForm(request.POST)
+            if form.is_valid():
+                form.save()
+                return redirect('lista_pacientes')
+        else:
+            form = PacienteForm()
+        return render(request, 'gestionPacientes/paciente_form.html', {'form': form})
     else:
-        form = PacienteForm()
-    return render(request, 'gestionPacientes/paciente_form.html', {'form': form})
+        return HttpResponse("No tienes permisos para ver esta página")
 
 def lista_historias_clinicas(request):
+    role = getRole(request)
     historias = HistoriaClinica.objects.all()
     return render(request, 'gestionPacientes/lista_historias_clinicas.html', {'historias': historias})
 
