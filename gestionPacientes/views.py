@@ -3,10 +3,12 @@ from .models import Paciente, HistoriaClinica, Adenda
 from .forms import PacienteForm, HistoriaClinicaForm, AdendaForm
 from FinalRasi.auth0backend import getRole
 from django.http import HttpResponseRedirect, HttpResponse
+from django.contrib.auth.decorators import login_required
 
 def inicio(request):
     return render(request, 'inicio.html')
 
+@login_required
 def lista_pacientes(request):
     role = getRole(request)
     if role == 'Doctor':
