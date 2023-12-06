@@ -13,5 +13,14 @@
             </li>
         {% endfor %}
     </ul>
+
+    <div class="container">
+        <h2>Consultar Historia Clínica</h2>
+        <form action="{% url 'buscar_historia_clinica' %}" method="get">
+          <label for="id_historia">ID de Historia Clínica:</label>
+          <input type="text" id="id_historia" name="id" required />
+          <button type="submit">Buscar</button>
+        </form>
+      </div>
 </body>
 </html>
