@@ -1,5 +1,4 @@
-{% extends 'base.html' %}
-{% block content %}
+{% extends 'base.html' %} {% block content %}
 
 <div
   style="display: flex; align-items: center; justify-content: center"
@@ -7,16 +6,18 @@
 >
   <img style="width: 80%" src="/static/media/monitor.png" />
 </div>
-<body>
-  <div class="container">
-    <h2>Consultar Historia Clínica</h2>
-    <form action="{% url 'buscar_historia_clinica' %}" method="get">
-      <label for="id_historia">ID de Historia Clínica:</label>
-      <input type="text" id="id_historia" name="id" required />
-      <button type="submit">Buscar</button>
-    </form>
-  </div>
-</body>
 
+<div class="content">
+  <body>
+    <div class="container">
+      <h2>Consultar Historia Clínica</h2>
+      <form action="{% url 'buscar_historia_clinica' %}" method="get">
+        <label for="id_historia">ID de Historia Clínica:</label>
+        <input type="text" id="id_historia" name="id" required />
+        <button type="submit">Buscar</button>
+      </form>
+    </div>
+  </body>
+</div>
 
 {% endblock %}
