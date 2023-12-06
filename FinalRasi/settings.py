@@ -76,8 +76,12 @@ WSGI_APPLICATION = 'FinalRasi.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'historias_db',
+        'USER': 'user1',
+        'PASSWORD': '12345',
+        'HOST': '10.128.0.6',
+        'PORT': '5432',
     }
 }
 
