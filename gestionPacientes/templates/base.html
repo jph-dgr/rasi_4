@@ -31,6 +31,7 @@
       </nav>
 
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        {% if user.is_authenticated %}
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
             <a class="nav-link" href="{% url 'lista_historias_clinicas' %}"
