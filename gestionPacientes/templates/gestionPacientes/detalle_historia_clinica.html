@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Detalle de Historia Clínica</title>
+</head>
+<body>
+    {% if historia %}
+        <h1>Historia Clínica de {{ historia.paciente.nombre }}</h1>
+        <!-- Detalles de la historia clínica -->
+    {% else %}
+        <p>Por favor, ingrese un ID de historia clínica válido.</p>
+    {% endif %}
+</body>
+</html>
+

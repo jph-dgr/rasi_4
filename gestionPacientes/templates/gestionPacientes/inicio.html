@@ -1,0 +1,118 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Página de Inicio - Gestión de Pacientes</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+        }
+
+        .invisible-link {
+        color: #50b3a2; /* Color igual al de la barra de navegación */
+        }
+
+        .invisible-link:hover {
+        color: #50b3a2; /* O cualquier otro color para el hover */
+        }
+
+        header {
+            background: #50b3a2;
+            color: white;
+            padding-top: 30px;
+            min-height: 70px;
+            border-bottom: #e8491d 3px solid;
+        }
+
+        header a {
+            color: #ffffff;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 16px;
+        }
+
+        header ul {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+            overflow: hidden;
+        }
+
+        header li {
+            float: left;
+            display: inline;
+            padding: 0 20px 0 20px;
+        }
+
+        header #branding {
+            float: left;
+        }
+
+        header #branding h1 {
+            margin: 0;
+        }
+
+        header nav {
+            float: right;
+            margin-top: 10px;
+        }
+
+        header .highlight, header .current a {
+            color: #e8491d;
+            font-weight: bold;
+        }
+
+        header a:hover {
+            color: #ffffff;
+            font-weight: bold;
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        label, input, button {
+            margin: 5px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div id="branding">
+                <h1><span class="highlight">Rasi</span> Medical</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="{% url 'lista_historias_clinicas' %}">Listar Historias Clínicas</a></li>
+                    <li><a href="{% url 'crear_historia_clinica' %}">Crear Historia Clínica</a></li>
+                    <li><a href="{% url 'crear_paciente' %}" class="invisible-link">Crear Paciente</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <h2>Consultar Historia Clínica</h2>
+        <form action="{% url 'buscar_historia_clinica' %}" method="get">
+            <label for="id_historia">ID de Historia Clínica:</label>
+            <input type="text" id="id_historia" name="id" required>
+            <button type="submit">Buscar</button>
+        </form>        
+    </div>
+
+
+    <!-- Aquí puedes añadir más contenido o secciones a tu página de inicio si lo deseas -->
+
+</body>
+</html>

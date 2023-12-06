@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lista de Historias Clínicas</title>
+</head>
+<body>
+    <h2>Historias Clínicas</h2>
+    <ul>
+        {% for historia in historias %}
+            <li>
+                {{ historia.paciente.nombre }} {{ historia.paciente.apellido }} - <a href="{% url 'detalle_historia_clinica' historia.id %}">Ver Detalle</a>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
