@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Paciente, HistoriaClinica, Adenda
 from .forms import PacienteForm, HistoriaClinicaForm, AdendaForm
-from monitoring.auth0backend import getRole
+from FinalRasi.auth0backend import getRole
 from django.http import HttpResponseRedirect, HttpResponse
 
 def inicio(request):
