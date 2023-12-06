@@ -14,11 +14,11 @@
     ></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     {% block head %}
-    <title>ISIS2503</title>
+    <title>Página de Inicio - Gestión de Pacientes</title>
     {% endblock %}
   </head>
+
   <body>
-    <br />
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <nav class="navbar navbar-light bg-light">
         <a class="navbar-brand" href="/">
@@ -27,16 +27,25 @@
       </nav>
 
       <nav class="navbar navbar-light bg-light">
-        <a class="navbar-brand" href="/"> Monitoring App </a>
+        <a class="navbar-brand" href="/"> RASI MEDICAL </a>
       </nav>
 
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <a class="nav-link" href="/variables/">Variables</a>
+            <a class="nav-link" href="{% url 'lista_historias_clinicas' %}"
+              >Listar Historias Clinicas</a
+            >
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/measurements/">Measurements</a>
+            <a class="nav-link" href="{% url 'crear_historia_clinica' %}"
+              >Crear Historia Clinica</a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'crear_paciente' %}"
+              >Crear Pacientes</a
+            >
           </li>
         </ul>
 
@@ -73,34 +82,6 @@
       </div>
     </nav>
 
-    <main>
-      <div class="container" style="min-height: 580px">
-        {% block content %} {% endblock %}
-      </div>
-    </main>
+    <!-- Aquí puedes añadir más contenido o secciones a tu página de inicio si lo deseas -->
   </body>
-
-  <!-- Footer -->
-  <footer
-    style="
-      background-color: #d8d8d8;
-      position: relative;
-      bottom: 0;
-      width: 100%;
-      height: 100px;
-    "
-  >
-    <div style="padding: 30px">
-      <div style="float: left; width: 400px">
-        ISIS-2503 Arquitectura y Diseño de Software
-      </div>
-      <div style="float: right; width: 220px">Universidad de los Andes</div>
-      <br />
-      <div style="float: left; width: 400px">
-        <i>Iván David Alfonso Díaz</i>
-      </div>
-    </div>
-    <br />
-  </footer>
-  <!-- Footer -->
 </html>
