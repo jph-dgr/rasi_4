@@ -84,6 +84,17 @@
       </div>
     </nav>
 
+    {% if user.is_authenticated %}
+    <div class="container">
+      <h2>Consultar Historia Clínica</h2>
+      <form action="{% url 'buscar_historia_clinica' %}" method="get">
+        <label for="id_historia">ID de Historia Clínica:</label>
+        <input type="text" id="id_historia" name="id" required />
+        <button type="submit">Buscar</button>
+      </form>
+    </div>
+    {% endif %}
+
     <!-- Aquí puedes añadir más contenido o secciones a tu página de inicio si lo deseas -->
   </body>
 </html>

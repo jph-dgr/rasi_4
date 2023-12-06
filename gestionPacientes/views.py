@@ -11,7 +11,7 @@ def inicio(request):
 @login_required
 def lista_pacientes(request):
     role = getRole(request)
-    if role == 'Doctor':
+    if role == 'Doctor' or role == 'Enfermero':
         pacientes = Paciente.objects.all()
         return render(request, 'gestionPacientes/lista_pacientes.html', {'pacientes': pacientes})
     else:
@@ -37,35 +37,47 @@ def lista_historias_clinicas(request):
     return render(request, 'gestionPacientes/lista_historias_clinicas.html', {'historias': historias})
 
 def crear_historia_clinica(request):
-    if request.method == 'POST':
-        form = HistoriaClinicaForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('lista_historias_clinicas')
+    role = getRole(request)
+    if role == 'Doctor':
+        if request.method == 'POST':
+            form = HistoriaClinicaForm(request.POST)
+            if form.is_valid():
+                form.save()
+                return redirect('lista_historias_clinicas')
+        else:
+            form = HistoriaClinicaForm()
+        return render(request, 'gestionPacientes/historia_clinica_form.html', {'form': form})
     else:
-        form = HistoriaClinicaForm()
-    return render(request, 'gestionPacientes/historia_clinica_form.html', {'form': form})
+        return HttpResponse("No tienes permisos para ver esta página")
 
 def buscar_historia_clinica(request):
-    id = request.GET.get('id', None)
-    historia = None
-    if id:
-        historia = get_object_or_404(HistoriaClinica, pk=id)
-    return render(request, 'gestionPacientes/detalle_historia_clinica.html', {'historia': historia})
+    role = getRole(request)
+    if role == 'Doctor' or role == 'Enfermero':
+        id = request.GET.get('id', None)
+        historia = None
+        if id:
+            historia = get_object_or_404(HistoriaClinica, pk=id)
+        return render(request, 'gestionPacientes/detalle_historia_clinica.html', {'historia': historia})
+    else:
+        return HttpResponse("No tienes permisos para ver esta página")
 
 def detalle_historia_clinica(request, id):
     historia = get_object_or_404(HistoriaClinica, pk=id)
     return render(request, 'gestionPacientes/detalle_historia_clinica.html', {'historia': historia})
 
 def crear_adenda(request):
-    if request.method == 'POST':
-        form = AdendaForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('alguna_url_después_de_crear')  # Reemplaza con la URL adecuada
+    role = getRole(request)
+    if role == 'Doctor':
+        if request.method == 'POST':
+            form = AdendaForm(request.POST)
+            if form.is_valid():
+                form.save()
+                return redirect('alguna_url_después_de_crear')  # Reemplaza con la URL adecuada
+        else:
+            form = AdendaForm()
+        return render(request, 'gestionPacientes/crear_adenda.html', {'form': form})
     else:
-        form = AdendaForm()
-    return render(request, 'gestionPacientes/crear_adenda.html', {'form': form})
+        return HttpResponse("No tienes permisos para ver esta página")
 
 def ver_adendas(request):
     id_historia_clinica = request.GET.get('id_historia_clinica')
