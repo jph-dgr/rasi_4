@@ -6,4 +6,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('gestionPacientes/', include('gestionPacientes.urls')),
     path('', gestionPacientes_views.inicio, name='inicio'),  # URL raíz
+    path(r'', include('django.contrib.auth.urls')),
+    path(r'', include('social_django.urls')),
 ]
