@@ -3,7 +3,7 @@ from .models import Paciente, HistoriaClinica, Adenda
 from .forms import PacienteForm, HistoriaClinicaForm, AdendaForm
 
 def inicio(request):
-    return render(request, 'gestionPacientes/inicio.html')
+    return render(request, 'gestionPacientes\templates\inicio.html')
 
 def lista_pacientes(request):
     pacientes = Paciente.objects.all()
